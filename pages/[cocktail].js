@@ -18,6 +18,9 @@ const useStyles = makeStyles(theme => ({
   paper: {
     padding: theme.spacing(5),
     marginTop: theme.spacing(3)
+  },
+  chip: {
+    marginLeft: theme.spacing(1)
   }
 }));
 
@@ -49,6 +52,7 @@ const Cocktail = doc => {
                   key={recipe_tag.tag.id}
                   color="secondary"
                   label={`${recipe_tag.tag.slug}`}
+                  className={classes.chip}
                 />
               );
             })}
