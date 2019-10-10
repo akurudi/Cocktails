@@ -16,7 +16,6 @@ export default class extends React.Component {
     return (
       <Layout>
         <CocktailCard data={this.props.doc} />
-        
       </Layout>
     );
   }

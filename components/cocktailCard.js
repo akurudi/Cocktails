@@ -5,13 +5,14 @@ import { makeStyles } from "@material-ui/core/styles";
 import LocalBarTwoToneIcon from "@material-ui/icons/LocalBarTwoTone";
 import { RichText } from "prismic-reactjs";
 
+const useStyles = makeStyles(theme => ({
+  paper: {
+    padding: theme.spacing(5),
+    marginTop: theme.spacing(3)
+  }
+}));
+
 export default props => {
-  const useStyles = makeStyles(theme => ({
-    root: {
-      padding: theme.spacing(3),
-      margin: theme.spacing(1)
-    }
-  }));
   const classes = useStyles();
   return (
     <Grid container justify="center">
@@ -21,8 +22,8 @@ export default props => {
           as={`/${recipe.uid}`}
           key={`${recipe.uid}`}
         >
-          <Grid item xs={11}>
-            <Paper className={classes.root} elevation={5}>
+          <Grid item xs={12}>
+            <Paper className={classes.paper} elevation={5}>
               <Typography variant="h5" component="h3">
                 <LocalBarTwoToneIcon />
                 {RichText.asText(recipe.data.name)}

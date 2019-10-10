@@ -1,31 +1,57 @@
 import React from "react";
 import { client } from "../prismic-configuration";
 import Layout from "../components/layout";
-import { Paper, Grid, Typography, Avatar } from "@material-ui/core";
+import {
+  Paper,
+  Grid,
+  Typography,
+  List,
+  ListItem,
+  ListItemText,
+  Divider,
+  Chip
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { RichText } from "prismic-reactjs";
 
-let Cocktail = doc => {
-  const useStyles = makeStyles(theme => ({
-    root: {
-      padding: theme.spacing(3, 2),
-      margin: theme.spacing(3, 2)
-    }
-  }));
+const useStyles = makeStyles(theme => ({
+  paper: {
+    padding: theme.spacing(5),
+    marginTop: theme.spacing(3)
+  }
+}));
+
+const Cocktail = doc => {
   const classes = useStyles();
   return (
     <Layout>
       <Grid container justify="center">
-        <Grid item xs={11}>
-          <Paper className={classes.root} elevation={20}>
+        <Grid item xs={12}>
+          <Paper className={classes.paper} elevation={20}>
             <Typography variant="h5" component="h3">
               {RichText.asText(doc.data.name)}
             </Typography>
-            <ul>
-            {doc.data.ingredients.map(elem => {
-              return <li key={elem.ingredient}>{elem.ingredient}</li>;
+            <List>
+              {doc.data.ingredients.map((elem, i) => {
+                return (
+                  <React.Fragment key={elem.ingredient}>
+                    <ListItem>
+                      <ListItemText primary={elem.ingredient} />
+                    </ListItem>
+                    <Divider />
+                  </React.Fragment>
+                );
+              })}
+            </List>
+            {doc.data.recipe_tags.map(recipe_tag => {
+              return (
+                <Chip
+                  key={recipe_tag.tag.id}
+                  color="secondary"
+                  label={`${recipe_tag.tag.slug}`}
+                />
+              );
             })}
-            </ul>
           </Paper>
         </Grid>
       </Grid>
